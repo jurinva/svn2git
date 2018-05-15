@@ -4,13 +4,18 @@ if [ $# -gt 0 ]; then
   while [[ $# -gt 0 ]]; do
     key="$1"
     case $key in
-      -s|--svn)
-      SVN="$2"
+      -c|--commit)
+      COMMIT="$2"
       shift # past argument
       shift # past value
       ;;
       -g|--git)
       GIT="$2"
+      shift # past argument
+      shift # past value
+      ;;
+      -s|--svn)
+      SVN="$2"
       shift # past argument
       shift # past value
       ;;
@@ -24,5 +29,6 @@ if [ $# -gt 0 ]; then
 fi
 
 svn checkout $(SVN) $(TARGET)
+cd $(TARGET)
 svn log -q | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > authors-transform.txt
-git svn clone -r2:HEAD svn://svn.code.sf.net/p/bkunix/code --no-metadata --authors-file=authors-transform.txt --stdlayout /tmp/temp
+git svn clone -r$(COMMIT):HEAD $(SVN) --no-metadata --authors-file=authors-transform.txt --stdlayout $(GIT)

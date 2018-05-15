@@ -33,10 +33,10 @@ confirm() {
     read -r -p "${1:-continue? [Y/n]} " response
     case "$response" in
         [nN])
-            true
+            false
             ;;
         *)
-            false
+            true
             ;;
     esac
 }

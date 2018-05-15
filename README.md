@@ -1,6 +1,23 @@
-#!/bin/bash
+# svn2git
 
 
-svn checkout svn://svn.code.sf.net/p/bkunix/code/trunk bkunix-code
-svn log -q | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > authors-transform.txt
-git svn clone -r2:HEAD svn://svn.code.sf.net/p/bkunix/code --no-metadata --authors-file=authors-transform.txt --stdlayout /tmp/temp
+This script can help you move from svn to git repositories.
+
+## Options
+
+-c, --commit
+        The number of the commit at which to start migration
+
+-g, --git
+        The git folder of the repository
+
+-s, --svn
+        SVN repository URL
+
+-t, --target
+        The svn folder of the repository
+
+## Example
+```bash
+sv2git.sh -c 2 -s svn://svn.code.sf.net/p/sample/code/trunk -t bkunix-code -g sample
+```

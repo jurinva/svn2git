@@ -19,5 +19,5 @@ This script can help you move from svn to git repositories.
 
 ## Example
 ```bash
-sv2git.sh -c 2 -s svn://svn.code.sf.net/p/sample/code/trunk -t bkunix-code -g sample
+sv2git.sh -c 2 -s svn://svn.code.sf.net/p/sample/code/trunk -t sample-code -g sample
 ```

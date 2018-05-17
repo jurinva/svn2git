@@ -1,4 +1,4 @@
-svn2git
+SVN2GIT
 =======
 
 **svn2git** - svn to git repositories migration tool.
@@ -14,7 +14,7 @@ DESCRIPTION
 
 Utility to migrate svn repository to git.
 
-Options
+OPTIONS
 -------
 
 -c, --commit  

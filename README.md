@@ -5,16 +5,16 @@ This script can help you move from svn to git repositories.
 
 ## Options
 
--c, --commit
+-c, --commit  
         The number of the commit at which to start migration
 
--g, --git
+-g, --git  
         The git folder of the repository
 
--s, --svn
+-s, --svn  
         SVN repository URL
 
--t, --target
+-t, --target  
         The svn folder of the repository
 
 ## Example

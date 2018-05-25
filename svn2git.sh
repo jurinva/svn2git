@@ -52,13 +52,15 @@ confirm() {
   esac
 }
 
+main() {
+  svn checkout $SVN $TARGET
+  cd $TARGET
+  svn log -q | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > authors-transform.txt
+  nano ./authors-transform.txt
+  rm -rf $GIT
+  if [ ! -z $COMMIT ]; then COMMITOPTN="-r$COMMIT:HEAD"; fi
+  confirm && git svn clone $COMMITOPTN $SVN --no-metadata --authors-file=authors-transform.txt --stdlayout $GIT
+}
 
-
-svn checkout $SVN $TARGET
-cd $TARGET
-svn log -q | awk -F '|' '/^r/ {sub("^ ", "", $2); sub(" $", "", $2); print $2" = "$2" <"$2">"}' | sort -u > authors-transform.txt
-nano ./authors-transform.txt
-rm -rf $GIT
-if [ ! -z $COMMIT ]; then COMMITOPTN="-r$COMMIT:HEAD"; fi
-confirm && git svn clone $COMMITOPTN $SVN --no-metadata --authors-file=authors-transform.txt --stdlayout $GIT
+main
 

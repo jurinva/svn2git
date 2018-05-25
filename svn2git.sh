@@ -35,19 +35,21 @@ if [ $# -gt 0 ]; then
       ;;
     esac
   done
+else
+  help
 fi
 
 confirm() {
-    # call with a prompt string or use a default
-    read -r -p "${1:-continue? [Y/n]} " response
-    case "$response" in
-        [nN])
-            false
-            ;;
-        *)
-            true
-            ;;
-    esac
+  # call with a prompt string or use a default
+  read -r -p "${1:-continue? [Y/n]} " response
+  case "$response" in
+    [nN])
+    false
+    ;;
+    *)
+    true
+    ;;
+  esac
 }
 
 

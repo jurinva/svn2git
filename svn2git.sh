@@ -32,7 +32,11 @@ if [ $# -gt 0 ]; then
       ;;
       -h|--help)
       help
+      shift # past argument
       ;;
+      -y|--yes)
+      YES=true
+      shift # past argument
     esac
   done
 else
@@ -41,15 +45,17 @@ fi
 
 confirm() {
   # call with a prompt string or use a default
-  read -r -p "${1:-continue? [Y/n]} " response
-  case "$response" in
-    [nN])
-    false
-    ;;
-    *)
-    true
-    ;;
+  if [ ! $YES ]; then
+    read -r -p "${1:-continue? [Y/n]} " response
+    case "$response" in
+      [nN])
+      false
+      ;;
+      *)
+      true
+      ;;
   esac
+  else true; fi
 }
 
 main() {
